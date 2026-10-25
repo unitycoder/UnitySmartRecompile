@@ -1,8 +1,10 @@
-# Smart Script Refresh for Unity
+<img src="https://img.shields.io/badge/VibeCoded-100%25-green" alt="AI Generated Content"/>
+
+# Smart Recompile for Unity
 
 An experimental Unity Editor tool that defers script compilation when you only change comments or formatting.
 
-| | Default Unity behavior | Smart Script Refresh |
+| | Default Unity behavior | Smart Recompile |
 |---|---|---|
 | Save a comment or blank line | May recompile | Defers automatic refresh |
 | Save a code change | Recompiles | Triggers refresh and compilation |
@@ -11,8 +13,8 @@ An experimental Unity Editor tool that defers script compilation when you only c
 
 ## Installation
 
-1. Copy `SmartScriptRefresh/Editor/SmartScriptRefreshWindow.cs` into your project's `Assets` folder (preserving the `Editor` subfolder).
-2. Open **Tools > Smart Script Refresh** in Unity.
+1. Copy `Plugins/SmartRecompile/Editor/SmartRecompile.cs` into your project's `Assets` folder (preserving the `Editor` subfolder).
+2. Open **Tools > UnityLibrary > Smart Recompile** in Unity.
 3. Enable the tool. The window shows the active comparer, pending edits, compilation counts, and event log.
 4. If available, disable Visual Studio's **Refresh Unity's AssetDatabase on save** option.
 
