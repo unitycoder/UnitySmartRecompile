@@ -24,6 +24,33 @@ Tested target: **Unity 6000.7.0b6** (experimental; not broadly validated).
 
 The tool watches `.cs` files under `Assets`, compares their contents with Roslyn when available (otherwise a conservative text comparison), and blocks Unity's *automatic* asset refresh until a code change is detected. Use **Refresh Now** to import pending changes manually.
 
+## Optional: Enable Roslyn comparison
+
+Roslyn is **not required**. Without it, the tool uses a conservative text comparison. To test Roslyn-based detection, install `Microsoft.CodeAnalysis.CSharp` and its dependencies into the Unity Editor.
+
+**Option A: NuGetForUnity (easiest)**
+
+1. In Unity, open **Window > Package Manager > + > Install package from git URL**.
+2. Install:
+
+   ```text
+   https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity
+   ```
+
+3. Open **NuGet > Manage NuGet Packages**, search for `Microsoft.CodeAnalysis.CSharp`, and install version `4.3.1` as a starting point. NuGetForUnity should resolve dependencies, including `Microsoft.CodeAnalysis.Common`.
+4. If needed, configure imported DLLs to load in the **Editor** only, not player builds.
+
+**Option B: Manual DLL installation**
+
+1. Download the `.nupkg` archives for [Microsoft.CodeAnalysis.CSharp 4.3.1](https://www.nuget.org/packages/Microsoft.CodeAnalysis.CSharp/4.3.1) and [Microsoft.CodeAnalysis.Common 4.3.1](https://www.nuget.org/packages/Microsoft.CodeAnalysis.Common/4.3.1).
+2. Open them as ZIP archives and extract `Microsoft.CodeAnalysis.CSharp.dll` and `Microsoft.CodeAnalysis.dll` from `lib/netstandard2.0`.
+3. Place them under `Assets/Plugins/Editor/Roslyn/`. Additional NuGet dependencies might also be required.
+
+Open the Smart Recompile window and check **Comparer**. It should show `Roslyn syntax trees (reflection)` instead of `Conservative line comparison`.
+
+**Note:** Unity's internal Roslyn version can differ from the package version. Test this in a separate project first and remove the imported packages if they cause assembly conflicts. No changes to `SmartRecompile.cs` are necessary.
+
+
 ## Limitations
 
 - **Not a true compilation bypass:** a later refresh can still recompile files changed only in comments or whitespace.
