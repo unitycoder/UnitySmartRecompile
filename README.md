@@ -31,3 +31,7 @@ The tool watches `.cs` files under `Assets`, compares their contents with Roslyn
 - Watches the `Assets` folder only, not packages.
 
 Disable the tool to restore Unity's normal refresh behavior and refresh pending changes.
+
+### Images
+
+<img width="739" height="751" alt="image" src="https://github.com/user-attachments/assets/1dab2b07-acc3-4abb-bbbf-3cbcd6fb0473" />
